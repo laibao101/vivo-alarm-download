@@ -1,4 +1,29 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>早安蝶宝 · 下载</title><style>
-*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;color:#172747;background:radial-gradient(circle at 80% 0,#dce8ff,transparent 40%),#f3f6fc}main{max-width:760px;margin:auto;padding:48px 24px 72px}.brand{display:flex;align-items:center;gap:12px;font-weight:700}.brand img{width:44px;height:44px;border-radius:13px}.tag{display:inline-block;margin-top:64px;color:#315de8;background:#e7edff;border-radius:99px;padding:8px 14px;font-size:13px}h1{font-size:clamp(32px,7vw,52px);line-height:1.3;margin:18px 0}p{line-height:1.8;color:#607292}.card{background:#fff;border-radius:22px;padding:25px;margin-top:32px;box-shadow:0 12px 38px #2d4b8010}.button{display:block;text-align:center;background:linear-gradient(110deg,#335de7,#3978ee);color:white;text-decoration:none;font-weight:700;border-radius:14px;padding:17px;margin:24px 0 12px}.small{font-size:13px}.note{border-left:3px solid #ecaa68;padding-left:15px;margin-top:25px}footer{font-size:13px;color:#8393ae;margin-top:44px}
-</style></head><body><main><div class="brand"><img src="icon.svg" alt="">早安蝶宝</div><div class="tag">安卓应用 · 测试版</div><h1>把排班交给我，<br>安心迎接每一天。</h1><p>粘贴排班，按上班时间提前 30 分钟提醒。支持休息日和每天不同的班次。</p><section class="card"><h2>下载安装</h2><p>适用于已验证的 vivo X90 Pro+。下载后在手机中打开安装包。</p><a class="button" href="vivo-alarm-check.apk" download>下载安卓安装包</a><p class="small">下载的文件为 APK 格式。首次安装时，请按手机提示操作。</p><p class="small note">请核对排班预览和手机日历中的提醒方式。卸载已有应用会丢失日程管理记录。</p></section><footer>早安蝶宝 · 下载页面</footer></main></body></html>
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;color:#172747;background:radial-gradient(circle at 80% 0,#dce8ff,transparent 40%),#f3f6fc}main{max-width:760px;margin:auto;padding:48px 24px 72px}.brand{display:flex;align-items:center;gap:12px;font-weight:700}.brand img{width:44px;height:44px;border-radius:13px}.tag{display:inline-block;margin-top:64px;color:#315de8;background:#e7edff;border-radius:99px;padding:8px 14px;font-size:13px}h1{font-size:clamp(32px,7vw,52px);line-height:1.3;margin:18px 0}p{line-height:1.8;color:#607292}.card{background:#fff;border-radius:22px;padding:25px;margin-top:32px;box-shadow:0 12px 38px #2d4b8010}.button{display:block;text-align:center;background:linear-gradient(110deg,#335de7,#3978ee);color:white;text-decoration:none;font-weight:700;border-radius:14px;padding:17px;margin:24px 0 12px}.small{font-size:13px}.note{border-left:3px solid #ecaa68;padding-left:15px;margin-top:25px}.history{margin-top:32px}.history h2{margin-bottom:8px}.version{border-top:1px solid #e8edf7;padding:18px 0;display:flex;align-items:center;gap:16px;justify-content:space-between}.version:first-of-type{border-top:0}.version-info{min-width:0}.version strong{display:block;color:#172747}.version p{margin:5px 0 0;font-size:13px;overflow-wrap:anywhere}.version a{color:#315de8;text-decoration:none;font-weight:700;white-space:nowrap;padding:12px 4px}.history-message{font-size:14px}footer{font-size:13px;color:#8393ae;margin-top:44px}
+</style></head><body><main><div class="brand"><img src="icon.svg" alt="">早安蝶宝</div><div class="tag">安卓应用 · 测试版</div><h1>把排班交给我，<br>安心迎接每一天。</h1><p>粘贴排班，按上班时间提前 30 分钟提醒。支持休息日和每天不同的班次。</p><section class="card"><h2>下载安装</h2><p>适用于已验证的 vivo X90 Pro+。下载后在手机中打开安装包。</p><a id="latest-download" class="button" href="vivo-alarm-check.apk" download>下载最新安装包</a><p class="small">下载的文件为 APK 格式。首次安装时，请按手机提示操作。</p><p class="small note">请核对排班预览和手机日历中的提醒方式。卸载已有应用会丢失日程管理记录。</p></section><section class="card history"><h2>历史版本</h2><p class="small">每次发布的安装包都会保留。系统可能不允许直接覆盖安装较旧版本。</p><div id="versions"><p class="history-message">正在加载版本记录…</p></div></section><footer>早安蝶宝 · 下载页面</footer></main><script>
+(async function () {
+  const container = document.getElementById('versions');
+  try {
+    const response = await fetch('versions.json', {cache: 'no-store'});
+    if (!response.ok) throw new Error('版本记录暂不可用');
+    const versions = await response.json();
+    if (!Array.isArray(versions) || !versions.length) throw new Error('暂无历史版本');
+    container.replaceChildren();
+    versions.forEach(function (version, index) {
+      if (typeof version.url !== 'string' || !/^versions\/(?:build-[0-9]+-[0-9]+|previous)\.apk$/.test(version.url)) return;
+      const row = document.createElement('div'); row.className = 'version';
+      const info = document.createElement('div'); info.className = 'version-info';
+      const title = document.createElement('strong'); title.textContent = String(version.label || '历史版本') + (index === 0 ? ' · 最新' : '');
+      const details = document.createElement('p');
+      let date = '';
+      if (version.date && !Number.isNaN(Date.parse(version.date))) date = new Date(version.date).toLocaleDateString('zh-CN', {timeZone:'Asia/Shanghai', year:'numeric', month:'long', day:'numeric'});
+      details.textContent = [date || '发布日期未知', version.description || '', version.commit ? '代码 ' + version.commit : ''].filter(Boolean).join(' · ');
+      const link = document.createElement('a'); link.href = version.url; link.download = ''; link.textContent = '下载';
+      info.append(title, details); row.append(info, link); container.append(row);
+      if (index === 0) document.getElementById('latest-download').href = version.url;
+    });
+    if (!container.children.length) throw new Error('暂无可用的版本记录');
+  } catch (error) { container.textContent = '版本记录暂时无法加载，请稍后重试。'; }
+})();
+</script></body></html>

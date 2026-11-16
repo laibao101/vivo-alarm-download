@@ -1,0 +1,17 @@
+[
+  {
+    "id": "11-1",
+    "label": "构建 11-1",
+    "date": "2026-11-16T12:12:15+00:00",
+    "description": "Archive downloads and display build history",
+    "commit": "ac81946",
+    "url": "versions/build-11-1.apk"
+  },
+  {
+    "id": "previous",
+    "label": "此前版本",
+    "date": "",
+    "description": "建立历史版本记录前的安装包",
+    "url": "versions/previous.apk"
+  }
+]
