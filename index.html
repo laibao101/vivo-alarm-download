@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>排班日历闹钟 · 下载</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;color:#172747;background:radial-gradient(circle at 80% 0,#dce8ff,transparent 40%),#f3f6fc}main{max-width:760px;margin:auto;padding:40px 24px 64px}.brand{display:flex;align-items:center;gap:12px;font-weight:700}.brand img{width:44px;height:44px;border-radius:13px}.tag{display:inline-block;margin-top:44px;color:#315de8;background:#e7edff;border-radius:99px;padding:8px 14px;font-size:13px}h1{font-size:clamp(30px,7vw,48px);line-height:1.3;margin:18px 0}p{line-height:1.8;color:#607292}.card{background:#fff;border-radius:22px;padding:25px;margin-top:28px;box-shadow:0 12px 38px #2d4b8010}.current{border:2px solid #4773ed;background:linear-gradient(135deg,#fff 45%,#edf3ff)}.badge{display:inline-flex;align-items:center;gap:7px;color:#2454d4;background:#e2ebff;border-radius:99px;padding:7px 12px;font-size:13px;font-weight:700}.badge:before{content:"";width:7px;height:7px;border-radius:50%;background:#315de8}.current h2{font-size:30px;margin:18px 0 8px;overflow-wrap:anywhere}.meta{font-size:13px;margin:5px 0}.button{display:block;text-align:center;background:linear-gradient(110deg,#335de7,#3978ee);color:white;text-decoration:none;font-weight:700;border-radius:14px;padding:17px;margin:24px 0 12px}.small{font-size:13px}.note{border-left:3px solid #ecaa68;padding-left:15px;margin-top:22px}.history h2{margin:0 0 8px}.version{border-top:1px solid #e8edf7;padding:20px 0;display:flex;align-items:center;gap:16px;justify-content:space-between}.version:first-child{border-top:0}.version-info{min-width:0}.version strong{display:block;overflow-wrap:anywhere}.version p{margin:5px 0 0;font-size:13px;overflow-wrap:anywhere}.version a{color:#315de8;text-decoration:none;font-weight:700;white-space:nowrap;padding:12px 4px}.history-message{font-size:14px}footer{font-size:13px;color:#8393ae;margin-top:36px}@media(max-width:420px){main{padding:24px 16px 48px}.card{padding:20px}.tag{margin-top:32px}.current h2{font-size:27px}}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;color:#172747;background:radial-gradient(circle at 80% 0,#dce8ff,transparent 40%),#f3f6fc}main{max-width:760px;margin:auto;padding:40px 24px 64px}.brand{display:flex;align-items:center;gap:12px;font-weight:700}.brand img{width:44px;height:44px;border-radius:13px}.tag{display:inline-block;margin-top:44px;color:#315de8;background:#e7edff;border-radius:99px;padding:8px 14px;font-size:13px}h1{font-size:clamp(30px,7vw,48px);line-height:1.3;margin:18px 0}p{line-height:1.8;color:#607292}.card{background:#fff;border-radius:22px;padding:25px;margin-top:28px;box-shadow:0 12px 38px #2d4b8010}.current{border:2px solid #4773ed;background:linear-gradient(135deg,#fff 45%,#edf3ff)}.badge{display:inline-flex;align-items:center;gap:7px;color:#2454d4;background:#e2ebff;border-radius:99px;padding:7px 12px;font-size:13px;font-weight:700}.badge:before{content:"";width:7px;height:7px;border-radius:50%;background:#315de8}.current h2{font-size:30px;margin:18px 0 8px;overflow-wrap:anywhere}.meta{font-size:13px;margin:5px 0}.button{display:block;text-align:center;background:linear-gradient(110deg,#335de7,#3978ee);color:white;text-decoration:none;font-weight:700;border-radius:14px;padding:17px;margin:24px 0 12px}.small{font-size:13px}.note{border-left:3px solid #ecaa68;padding-left:15px;margin-top:22px}.history h2{margin:0 0 8px}.version{border-top:1px solid #e8edf7;padding:20px 0;display:flex;align-items:flex-start;gap:16px;justify-content:space-between}.version:first-child{border-top:0}.version-info{min-width:0;flex:1}.version strong{display:block;overflow-wrap:anywhere}.version p{margin:5px 0 0;font-size:13px;overflow-wrap:anywhere}.version a{color:#315de8;text-decoration:none;font-weight:700;white-space:nowrap;padding:12px 4px}.changelog{margin-top:10px;padding:11px 13px;background:#f3f6fc;border-radius:12px}.changelog-title{font-size:12px;color:#315de8;font-weight:700}.changelog ul{margin:6px 0 0;padding-left:18px;color:#607292;font-size:13px;line-height:1.7}.history-message{font-size:14px}footer{font-size:13px;color:#8393ae;margin-top:36px}@media(max-width:420px){main{padding:24px 16px 48px}.card{padding:20px}.tag{margin-top:32px}.current h2{font-size:27px}}
 </style>
 </head>
 <body><main>
@@ -36,6 +36,15 @@
     const identity = v.versionName ? '构建编号 ' + v.id : '版本号：原安装包未设置';
     return date + ' · ' + identity;
   }
+  function changelogBlock(version) {
+    const entries = Array.isArray(version.changelog) ? version.changelog.filter(item => typeof item === 'string' && item.trim()).slice(0, 8) : [];
+    if (!entries.length) return null;
+    const block = document.createElement('div'); block.className = 'changelog';
+    const label = document.createElement('div'); label.className = 'changelog-title'; label.textContent = '更新内容'; block.append(label);
+    const list = document.createElement('ul');
+    entries.forEach(function (entry) { const item = document.createElement('li'); item.textContent = entry; list.append(item); });
+    block.append(list); return block;
+  }
   try {
     const response = await fetch('versions.json', {cache:'no-store'});
     if (!response.ok) throw new Error();
@@ -47,6 +56,7 @@
     document.getElementById('latest-version').textContent = title(latest);
     document.getElementById('latest-date').textContent = metadata(latest);
     document.getElementById('latest-description').textContent = latest.description || '';
+    const latestChanges = changelogBlock(latest); if (latestChanges) document.getElementById('latest-description').after(latestChanges);
     const download = document.getElementById('latest-download');
     download.href = latest.url; download.textContent = latest.versionName ? '下载版本 ' + latest.versionName : '下载最新安装包';
     container.replaceChildren();
@@ -58,7 +68,7 @@
       const description = document.createElement('p'); description.textContent = version.description || '';
       const link = document.createElement('a'); link.href = version.url; link.download = ''; link.textContent = '下载';
       link.setAttribute('aria-label', '下载' + title(version));
-      info.append(heading, details, description); row.append(info, link); container.append(row);
+      info.append(heading, details, description); const changes = changelogBlock(version); if (changes) info.append(changes); row.append(info, link); container.append(row);
     });
     if (!container.children.length) container.textContent = '暂无更早版本。';
   } catch (error) {

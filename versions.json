@@ -1,5 +1,18 @@
 [
   {
+    "id": "17-1",
+    "label": "构建 17-1",
+    "date": "2026-11-16T16:59:01+00:00",
+    "description": "在下载页展示各版本更新内容",
+    "changelog": [
+      "在下载页展示各版本更新内容"
+    ],
+    "commit": "7095e4d",
+    "url": "versions/build-17-1.apk",
+    "versionName": "0.1.17",
+    "versionCode": "17"
+  },
+  {
     "id": "16-1",
     "label": "构建 16-1",
     "date": "2026-11-16T16:49:38+00:00",
@@ -7,7 +20,10 @@
     "commit": "f59b54f",
     "url": "versions/build-16-1.apk",
     "versionName": "0.1.16",
-    "versionCode": "16"
+    "versionCode": "16",
+    "changelog": [
+      "支持自定义提前响铃分钟数并移除示例休息日"
+    ]
   },
   {
     "id": "15-1",
@@ -17,7 +33,10 @@
     "commit": "8443c0c",
     "url": "versions/build-15-1.apk",
     "versionName": "0.1.15",
-    "versionCode": "15"
+    "versionCode": "15",
+    "changelog": [
+      "将创建和删除确认框改为应用自定义弹窗"
+    ]
   },
   {
     "id": "14-1",
@@ -27,7 +46,10 @@
     "commit": "7364ecd",
     "url": "versions/build-14-1.apk",
     "versionName": "0.1.14",
-    "versionCode": "14"
+    "versionCode": "14",
+    "changelog": [
+      "统一下载页与原型中的应用名称为排班日历闹钟"
+    ]
   },
   {
     "id": "13-1",
@@ -37,7 +59,10 @@
     "commit": "367a6ea",
     "url": "versions/build-13-1.apk",
     "versionName": "0.1.13",
-    "versionCode": "13"
+    "versionCode": "13",
+    "changelog": [
+      "补充X200 Pro验证机型并明确历史版本号"
+    ]
   },
   {
     "id": "12-1",
@@ -47,7 +72,10 @@
     "commit": "8767680",
     "url": "versions/build-12-1.apk",
     "versionName": "0.1.12",
-    "versionCode": "12"
+    "versionCode": "12",
+    "changelog": [
+      "下载页突出当前版本并显示安装包版本号"
+    ]
   },
   {
     "id": "11-1",
@@ -57,7 +85,10 @@
     "commit": "ac81946",
     "url": "versions/build-11-1.apk",
     "versionName": "",
-    "versionCode": ""
+    "versionCode": "",
+    "changelog": [
+      "Archive downloads and display build history"
+    ]
   },
   {
     "id": "previous",
@@ -66,6 +97,9 @@
     "description": "建立历史版本记录前的安装包",
     "url": "versions/previous.apk",
     "versionName": "",
-    "versionCode": ""
+    "versionCode": "",
+    "changelog": [
+      "建立历史版本记录前的安装包"
+    ]
   }
 ]
