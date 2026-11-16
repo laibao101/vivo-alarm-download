@@ -18,22 +18,22 @@
 <p id="latest-date" class="meta"></p>
 <p id="latest-description" class="small"></p>
 <a id="latest-download" class="button" href="vivo-alarm-check.apk" download>下载最新安装包</a>
-<p class="small">适用于已验证的 vivo X90 Pro+。下载后在手机中打开 APK 安装包。</p>
+<p class="small">已在 vivo X90 Pro+、vivo X200 Pro 上验证。下载后在手机中打开 APK 安装包。</p>
 <p class="small note">请核对排班预览和手机日历中的提醒方式。卸载已有应用会丢失日程管理记录。</p>
 </section>
-<section class="card history"><h2>历史版本</h2><p class="small">保留每次发布的安装包。系统可能不允许直接覆盖安装较旧版本。</p><div id="versions" aria-live="polite"><p class="history-message">正在加载版本记录…</p></div></section>
+<section class="card history"><h2>历史版本</h2><p class="small">每个版本均提供独立下载。早期安装包未设置版本号，使用构建编号区分；后续版本会显示正式版本号。系统可能不允许直接覆盖安装较旧版本。</p><div id="versions" aria-live="polite"><p class="history-message">正在加载版本记录…</p></div></section>
 <footer>早安蝶宝 · 下载页面</footer>
 </main>
 <script>
 (async function () {
   const container = document.getElementById('versions');
   function title(v) {
-    if (v.versionName) return '版本 ' + v.versionName;
-    return v.id === 'previous' ? '早期版本' : '版本 ' + v.id;
+    if (v.versionName) return '版本号：' + v.versionName;
+    return v.id === 'previous' ? '早期版本 · 初始存档' : '早期版本 · 构建 ' + v.id;
   }
   function metadata(v) {
     const date = v.date && !Number.isNaN(Date.parse(v.date)) ? new Date(v.date).toLocaleString('zh-CN', {timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false}) : '发布时间未记录';
-    const identity = v.id === 'previous' ? '原安装包未设置版本号' : (v.versionName ? '构建编号 ' + v.id : '早期构建编号 ' + v.id);
+    const identity = v.versionName ? '构建编号 ' + v.id : '版本号：原安装包未设置';
     return date + ' · ' + identity;
   }
   try {
@@ -48,7 +48,7 @@
     document.getElementById('latest-date').textContent = metadata(latest);
     document.getElementById('latest-description').textContent = latest.description || '';
     const download = document.getElementById('latest-download');
-    download.href = latest.url; download.textContent = '下载 ' + title(latest);
+    download.href = latest.url; download.textContent = latest.versionName ? '下载版本 ' + latest.versionName : '下载最新安装包';
     container.replaceChildren();
     versions.slice(1).forEach(function (version) {
       const row = document.createElement('div'); row.className = 'version';
