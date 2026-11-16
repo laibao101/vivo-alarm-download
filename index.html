@@ -45,6 +45,9 @@
     entries.forEach(function (entry) { const item = document.createElement('li'); item.textContent = entry; list.append(item); });
     block.append(list); return block;
   }
+  function hasChangelog(version) {
+    return Array.isArray(version.changelog) && version.changelog.some(item => typeof item === 'string' && item.trim());
+  }
   try {
     const response = await fetch('versions.json', {cache:'no-store'});
     if (!response.ok) throw new Error();
@@ -55,7 +58,7 @@
     const latest = versions[0];
     document.getElementById('latest-version').textContent = title(latest);
     document.getElementById('latest-date').textContent = metadata(latest);
-    document.getElementById('latest-description').textContent = latest.description || '';
+    document.getElementById('latest-description').textContent = hasChangelog(latest) ? '' : (latest.description || '');
     const latestChanges = changelogBlock(latest); if (latestChanges) document.getElementById('latest-description').after(latestChanges);
     const download = document.getElementById('latest-download');
     download.href = latest.url; download.textContent = latest.versionName ? '下载版本 ' + latest.versionName : '下载最新安装包';
@@ -65,7 +68,7 @@
       const info = document.createElement('div'); info.className = 'version-info';
       const heading = document.createElement('strong'); heading.textContent = title(version);
       const details = document.createElement('p'); details.textContent = metadata(version);
-      const description = document.createElement('p'); description.textContent = version.description || '';
+      const description = document.createElement('p'); description.textContent = hasChangelog(version) ? '' : (version.description || '');
       const link = document.createElement('a'); link.href = version.url; link.download = ''; link.textContent = '下载';
       link.setAttribute('aria-label', '下载' + title(version));
       info.append(heading, details, description); const changes = changelogBlock(version); if (changes) info.append(changes); row.append(info, link); container.append(row);
